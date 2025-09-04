@@ -12,7 +12,7 @@ resource "aws_eks_node_group" "eks-node-group" {
   }
 
   ami_type       = "AL2_x86_64"
-  instance_types = ["t2.medium"]
+  instance_types = ["t3.small"]
   disk_size      = 20
 
   depends_on = [
@@ -20,4 +20,5 @@ resource "aws_eks_node_group" "eks-node-group" {
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy
   ]
+
 }
