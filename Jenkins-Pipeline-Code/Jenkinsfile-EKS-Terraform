@@ -18,7 +18,8 @@ pipeline {
                 withAWS(credentials: 'aws-key', region: 'us-east-1') {
                 dir('EKS-TF') {
                     script {
-                        sh 'terraform init'
+                        sh 'terraform init -reconfigure'
+
                     }
                 }
                 }
@@ -68,3 +69,4 @@ pipeline {
         }
     }
 }
+
