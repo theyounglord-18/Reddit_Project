@@ -70,7 +70,7 @@ pipeline{
         stage('Update Deployment file') {
             environment {
                 GIT_REPO_NAME = "Reddit_Project"
-                GIT_USER_NAME = "theyounglord18"
+                GIT_USER_NAME = "theyounglord-18"
             }
             steps {
                 dir('K8s'){
@@ -93,6 +93,7 @@ pipeline{
         }
     }
 }
+
 
 
 
