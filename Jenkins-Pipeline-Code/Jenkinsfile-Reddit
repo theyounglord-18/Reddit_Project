@@ -54,28 +54,28 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){
                        sh "docker build -t reddit ."
-                       sh "docker tag reddit sreedhar8897/reddit:${BUILD_NUMBER} "
-                       sh "docker push sreedhar8897/reddit:${BUILD_NUMBER} "
+                       sh "docker tag reddit theyounglord18/reddit:${BUILD_NUMBER} "
+                       sh "docker push theyounglord18/reddit:${BUILD_NUMBER} "
                     }
                 }
             }
         }
         stage("TRIVY"){
             steps{
-                sh "trivy image sreedhar8897/reddit:latest > trivy.txt"
+                sh "trivy image theyounglord18/reddit:latest > trivy.txt"
             }
         }
         stage('Update Deployment file') {
             environment {
-                GIT_REPO_NAME = "Reddit-Project"
-                GIT_USER_NAME = "uniquesreedhar"
+                GIT_REPO_NAME = "Reddit"
+                GIT_USER_NAME = "theyounglord18"
             }
             steps {
                 dir('K8s'){
                     withCredentials([string(credentialsId: 'githubcred', variable: 'GITHUB_TOKEN')]) {
                         sh '''
-                            git config user.email "madithatisreedhar123@gmail.com"
-                            git config user.name "uniquesreedhar"
+                            git config user.email "kushalmohith09@gmail.com"
+                            git config user.name "theyounglord-18"
                             BUILD_NUMBER=${BUILD_NUMBER}
                             echo $BUILD_NUMBER
                             imageTag=$(grep -oP '(?<=reddit:)[^ ]+' deployment.yml)
@@ -91,5 +91,6 @@ pipeline{
         }
     }
 }
+
 
 
